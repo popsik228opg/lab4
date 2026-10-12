@@ -1,0 +1,13 @@
+import java.util.Random;
+
+public class EconomCar extends Car {
+
+    public EconomCar() {
+        super(new Random().nextInt(151) + 150);
+    }
+
+    @Override
+    public int calculate() {
+        return getIncome();
+    }
+}
