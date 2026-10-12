@@ -1,0 +1,19 @@
+
+public abstract class Car {
+    protected int price;
+    protected int hours;
+
+    public Car(int price) {
+        this.price = price;
+    }
+
+    public void setHours(int hours) {
+        this.hours = hours;
+    }
+
+    public int getIncome() {
+        return price * hours;
+    }
+
+    public abstract int calculate();
+}
