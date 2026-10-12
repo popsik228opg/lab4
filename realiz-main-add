@@ -1,0 +1,101 @@
+import java.util.ArrayList;
+import java.util.Random;
+
+public class TaxiService {
+    private ArrayList<Car> cars = new ArrayList<>();
+    private Random random = new Random();
+
+    public TaxiService() {
+        for (int i = 1; i <= 16; i++) {
+            if (i % 2 == 0) {
+                cars.add(new BusinessCar());
+            } else {
+                cars.add(new EconomCar());
+            }
+        }
+    }
+
+    // Основное задание
+    public void calculateIncome() {
+        int total = 0;
+
+        System.out.println("ОСНОВНОЕ ЗАДАНИЕ");
+
+        for (int day = 1; day <= 5; day++) {
+            int dailyIncome = 0;
+
+            for (Car car : cars) {
+                car.setHours(random.nextInt(9));
+                dailyIncome += car.calculate();
+            }
+
+            total += dailyIncome;
+
+            System.out.println(
+                "День " + day + ": " + dailyIncome + " руб."
+            );
+        }
+
+        System.out.println(
+            "Доход за неделю: " + total + " руб."
+        );
+    }
+
+    // Дополнительное задание
+    public void calculateWithDismissal() {
+        ArrayList<Car> workers = new ArrayList<>();
+
+        for (int i = 1; i <= 16; i++) {
+            if (i % 2 == 0) {
+                workers.add(new BusinessCar());
+            } else {
+                workers.add(new EconomCar());
+            }
+        }
+
+        int total = 0;
+
+        System.out.println("\nДОПОЛНИТЕЛЬНОЕ ЗАДАНИЕ");
+
+        for (int day = 1; day <= 5; day++) {
+            int dailyIncome = 0;
+            int minIncome = Integer.MAX_VALUE;
+            int minIndex = -1;
+
+            for (int i = 0; i < workers.size(); i++) {
+                Car car = workers.get(i);
+                car.setHours(random.nextInt(9));
+
+                int income = car.calculate();
+                dailyIncome += income;
+
+                if (income < minIncome) {
+                    minIncome = income;
+                    minIndex = i;
+                }
+            }
+
+            total += dailyIncome;
+
+            System.out.println(
+                "День " + day + ": " + dailyIncome + " руб."
+            );
+
+            System.out.println(
+                "Уволен таксист. Его доход: "
+                + minIncome + " руб."
+            );
+
+            workers.remove(minIndex);
+
+            System.out.println(
+                "Осталось таксистов: " + workers.size()
+            );
+        }
+
+        System.out.println(
+            "Доход за неделю с увольнениями: "
+            + total + " руб."
+        );
+    }
+}
