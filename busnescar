@@ -1,0 +1,13 @@
+import java.util.Random;
+
+public class BusinessCar extends Car {
+
+    public BusinessCar() {
+        super(new Random().nextInt(151) + 450);
+    }
+
+    @Override
+    public int calculate() {
+        return getIncome();
+    }
+}
